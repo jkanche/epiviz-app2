@@ -2,7 +2,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 <!-- Polymer Elements -->
-<link rel="import" href="../bower_components/app-layout/app-layout.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
@@ -88,10 +87,6 @@
                 --iron-icon-height: 18px;
             }
 
-            paper-tooltip {
-                z-index: 30001;
-            }
-
             .headerActions {
                 font-size: 15px;
                 padding-left: 0px;
@@ -105,7 +100,6 @@
                 grid-template-rows: 50px auto 75px;
                 grid-template-columns: auto;
                 grid-row-gap: 5px;
-                z-index: 10000001;
             }
 
             .grid {
@@ -158,6 +152,18 @@
             .info {
                 padding-left: 5px;
             }
+
+            #appHeader {
+                background-color: #e0e2e2;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            #appHeader .flexChild {
+                display: flex;
+                align-items: center;
+            }
         </style>
 
         <!-- TODO: Use routes in the future for loading workspaces and have a home page -->
@@ -173,45 +179,45 @@
 
         <!-- TODO: have a UI to actually add this on the fly like select data providers to visualize,
           update when there's a new python version -->
-        <app-header-layout style="z-index: 10001;">
-            <app-header slot="header" condenses>
-                <app-toolbar>
-                    <a href="http://epiviz.github.io" target="_blank">
-                        <img src="../../images/epiviz_4_logo_medium.png" alt="Epiviz" width="100" height="21">
-                    </a>
-                    <!-- <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> -->
-                    <paper-menu-button vertical-offset="50">
-                        <paper-button slot="dropdown-trigger">
-                            <span>Add New Panel</span>
-                            <iron-icon icon="icons:arrow-drop-down"></iron-icon>
-                        </paper-button>
-                        <paper-listbox slot="dropdown-content">
-                            <paper-item id="navBtn" on-click="_addNavigation">
-                                <img style="padding-right:5px" height="24px" width="24px" src="../../images/dna-scheme.svg"></img>
-                                <span> Genomic Region </span>
-                                <iron-icon class="info" id="navIcon" icon="icons:info-outline"></iron-icon>
-                                <paper-tooltip for="navIcon">Visualize data from a region</paper-tooltip>
-                            </paper-item>
-                            <paper-item id="ctnBtn" on-click="_addContainer">
-                                <img style="padding-right:5px" height="24px" width="24px" src="../../images/add-window-grid-symbol.svg"></img>
-                                <span>Genomic Wide</span>
-                                <iron-icon class="info" id="ctnIcon" icon="icons:info-outline"></iron-icon>
-                                <paper-tooltip for="ctnIcon" position="top">Visualize data from the entire dataset</paper-tooltip>
-                            </paper-item>
-                        </paper-listbox>
-                    </paper-menu-button>
-                    <div main-title></div>
-                    <epiviz-workspace id="eWorkspace" auth-domain="epiviz-auth.firebaseapp.com" database-url="https://epiviz-auth.firebaseio.com/"
-                        api-key="AIzaSyAsys0gDGLxQ2H7XNYrvaf9OMkaAK1hfCw" storage-bucket="epiviz-auth.appspot.com" messaging-sender-id="688767774580"
-                        target-selector="[[_targetSelector]]" workspace-id="{{routeWorkspace}}"></epiviz-workspace>
-                    <a href="http://epiviz.github.io" tabindex="-1" target="_blank">
-                        <paper-icon-button alt="Epiviz homepage" icon="icons:help"></paper-icon-button>
-                    </a>
-                    <paper-icon-button alt="Intro screen" on-tap="_openIntro" icon="icons:info"></paper-icon-button>
-                </app-toolbar>
-            </app-header>
+        <div id="appHeader">
+            <div class="flexChild">
+                <a href="http://epiviz.github.io" target="_blank">
+                    <img src="../../images/epiviz_4_logo_medium.png" alt="Epiviz" width="100" height="21">
+                </a>
+                <!-- <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> -->
+                <paper-menu-button vertical-offset="50">
+                    <paper-button slot="dropdown-trigger">
+                        <span>Add New Panel</span>
+                        <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                    </paper-button>
+                    <paper-listbox slot="dropdown-content">
+                        <paper-item id="navBtn" on-click="_addNavigation">
+                            <img style="padding-right:5px" height="24px" width="24px" src="../../images/dna-scheme.svg"></img>
+                            <span> Genomic Region </span>
+                            <iron-icon class="info" id="navIcon" icon="icons:info-outline"></iron-icon>
+                            <paper-tooltip for="navIcon">Visualize data from a region</paper-tooltip>
+                        </paper-item>
+                        <paper-item id="ctnBtn" on-click="_addContainer">
+                            <img style="padding-right:5px" height="24px" width="24px" src="../../images/add-window-grid-symbol.svg"></img>
+                            <span>Genomic Wide</span>
+                            <iron-icon class="info" id="ctnIcon" icon="icons:info-outline"></iron-icon>
+                            <paper-tooltip for="ctnIcon" position="top">Visualize data from the entire dataset</paper-tooltip>
+                        </paper-item>
+                    </paper-listbox>
+                </paper-menu-button>
+            </div>
+            <div class="flexChild">
+                <epiviz-workspace id="eWorkspace" auth-domain="epiviz-auth.firebaseapp.com" database-url="https://epiviz-auth.firebaseio.com/"
+                    api-key="AIzaSyAsys0gDGLxQ2H7XNYrvaf9OMkaAK1hfCw" storage-bucket="epiviz-auth.appspot.com" messaging-sender-id="688767774580"
+                    target-selector="[[_targetSelector]]" workspace-id="{{routeWorkspace}}"></epiviz-workspace>
+                <a href="http://epiviz.github.io" tabindex="-1" target="_blank">
+                    <paper-icon-button alt="Epiviz homepage" icon="icons:help"></paper-icon-button>
+                </a>
+                <paper-icon-button alt="Intro screen" on-tap="_openIntro" icon="icons:info"></paper-icon-button>
+            </div>
+        </div>
             <div id="epivizContent"></div>
-        </app-header-layout>
+
         <!-- <div id="epivizContent"></div> -->
 
         <!-- <app-drawer id="drawer" swipe-open></app-drawer> -->
