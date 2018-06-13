@@ -16,28 +16,17 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <!-- Epiviz Components -->
-<!-- <link rel="import" href="../bower_components/epiviz-imports/epiviz-common-js.html"> -->
 <link rel="import" href="../bower_components/epiviz-data-source/epiviz-data-source.html">
 <link rel="import" href="../bower_components/epiviz-workspace/epiviz-workspace.html">
 <link rel="import" href="../bower_components/epiviz-charts/epiviz-charts.html">
 
 <!-- default page home -->
-<!-- <link rel="import" href="epiviz-home.html"> -->
 
 <dom-module id="epiviz-app">
     <template>
         <style>
             :host {
                 display: block;
-            }
-
-            html,
-            body {
-                margin: 0;
-                font-family: 'Roboto', 'Noto', sans-serif;
-                -webkit-font-smoothing: antialiased;
-                background: #f1f1f1;
-                max-height: 368px;
             }
 
             app-toolbar {
@@ -167,7 +156,7 @@
         </style>
 
         <!-- TODO: Use routes in the future for loading workspaces and have a home page -->
-        <app-location route="{{route}}" use-hash-as-path></app-location>
+        <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:workspace" data="{{routeData}}" tail="{{subroute}}">
         </app-route>
 
@@ -216,14 +205,10 @@
                 <paper-icon-button alt="Intro screen" on-tap="_openIntro" icon="icons:info"></paper-icon-button>
             </div>
         </div>
-            <div id="epivizContent"></div>
+        <div id="epivizContent"></div>
 
-        <!-- <div id="epivizContent"></div> -->
-
-        <!-- <app-drawer id="drawer" swipe-open></app-drawer> -->
         <paper-dialog id="intro" modal>
             <h2 style="text-align:center; color: #4285f4">UMD Epiviz2 Browser</h2>
-            <!-- <paper-dialog-scrollable> -->
             <div class="tab-container">
                 <paper-tabs selected="{{tabselected}}">
                     <paper-tab>About</paper-tab>
@@ -308,10 +293,8 @@
                     </div>
                 </iron-pages>
             </div>
-            <!-- </paper-dialog-scrollable> -->
             <div class="buttons">
                 <paper-button dialog-dismiss>Close</paper-button>
-                <!-- <paper-button dialog-confirm autofocus>New Workspace</paper-button> -->
             </div>
         </paper-dialog>
     </template>
@@ -369,10 +352,8 @@
 
             connectedCallback() {
                 super.connectedCallback();
-                // if (this.$.epivizContent.textContent == "") {
                 this.$.intro.open();
                 this._targetSelector = document.querySelector("epiviz-app").shadowRoot.querySelector("#epivizContent");
-                // }
             }
 
             _onRouteWorkspaceChanged(newVal, oldVal) {
@@ -380,13 +361,10 @@
             }
 
             _onRouteData(ws) {
-                // $("#epivizContent").empty();
-                // this.showIntro = false;
                 if (ws != undefined && ws != "") {
                     this.$.eWorkspace.triggerReload = true;
                     this.$.eWorkspace.set("workspaceId", ws);
                 }
-                // this.$.eWorkspace.loadWorkSpaceId(ws);
             }
 
             _openIntro() {
@@ -398,9 +376,6 @@
 
                 var elem = document.createElement("epiviz-environment");
                 // TODO: Ask user for the location to start the element at.
-                // elem.setAttribute("chr", "chr11");
-                // elem.setAttribute("start", 3947953);
-                // elem.setAttribute("end", 7164991);
                 elem.setAttribute("no-logo", true);
                 self.$.epivizContent.appendChild(elem);
             }

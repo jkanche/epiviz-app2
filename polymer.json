@@ -14,12 +14,13 @@
   },
   "builds": [
     {
-      "preset": "es5-bundled",
-      "js": {
-        "minify": {
-          "exclude": ["*.min.js"]
-        }
-      }
+      "preset": "es5-bundled"
+    },
+    {
+      "preset": "es6-bundled"
+    },
+    {
+      "preset": "es6-unbundled"
     }
   ]
 }
