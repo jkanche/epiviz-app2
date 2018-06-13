@@ -17,8 +17,9 @@
 
 <!-- Epiviz Components -->
 <link rel="import" href="../bower_components/epiviz-data-source/epiviz-data-source.html">
-<link rel="import" href="../bower_components/epiviz-workspace/epiviz-workspace.html">
 <link rel="import" href="../bower_components/epiviz-charts/epiviz-charts.html">
+<link rel="import" href="../bower_components/epiviz-workspace/epiviz-workspace.html">
+
 
 <!-- default page home -->
 
@@ -156,7 +157,7 @@
         </style>
 
         <!-- TODO: Use routes in the future for loading workspaces and have a home page -->
-        <app-location route="{{route}}"></app-location>
+        <app-location route="{{route}}" use-hash-as-path></app-location>
         <app-route route="{{route}}" pattern="/:workspace" data="{{routeData}}" tail="{{subroute}}">
         </app-route>
 
@@ -336,8 +337,14 @@
                         type: Object
                     },
 
-                    routeData: Object,
-                    subroute: Object,
+                    routeData: {
+                        type: Object,
+                        notify: true
+                    },
+                    subroute: {
+                        type: Object,
+                        notify: true
+                    },
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
                     // Polymer.Element#rootPath
                     rootPath: String,

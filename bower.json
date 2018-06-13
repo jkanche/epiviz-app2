@@ -1,6 +1,8 @@
 {
   "name": "polymer-starter-kit",
-  "authors": ["The Polymer Authors"],
+  "authors": [
+    "The Polymer Authors"
+  ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {
     "app-route": "PolymerElements/app-route#^2.0.0",
@@ -19,7 +21,8 @@
   },
   "resolutions": {
     "polymer": "^2.0.0",
-    "epiviz-imports": "50adc4ede6"
+    "epiviz-imports": "50adc4ede6",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"
